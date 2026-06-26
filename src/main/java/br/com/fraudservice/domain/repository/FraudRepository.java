@@ -1,12 +1,14 @@
 package br.com.fraudservice.domain.repository;
 
+import br.com.fraudservice.domain.entity.FraudAlert;
+
 import java.util.Optional;
 import java.util.UUID;
 
 public interface FraudRepository {
-    void save(FraudRequirement fraud);
+    void save(FraudAlert fraud);
 
-    Optional<FraudRequirement> findById(UUID uuid);
+    Optional<FraudAlert> findById(UUID uuid);
 
 
 }

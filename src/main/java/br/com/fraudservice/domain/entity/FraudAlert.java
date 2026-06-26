@@ -27,9 +27,11 @@ public class FraudAlert {
     private UUID accountId;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private FraudScore score;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private FraudStatus status;
 
     @Column
