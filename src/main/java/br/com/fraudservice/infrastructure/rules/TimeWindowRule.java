@@ -2,11 +2,12 @@ package br.com.fraudservice.infrastructure.rules;
 
 import br.com.fraudservice.infrastructure.messaging.event.TransactionCreatedEvent;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Slf4j
+@Component
 public class TimeWindowRule implements FraudRule{
 
     private static final LocalTime MIDNIGHT = LocalTime.MIDNIGHT;

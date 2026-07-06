@@ -4,11 +4,13 @@ import br.com.fraudservice.infrastructure.messaging.event.TransactionCreatedEven
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 
 @Slf4j
 @RequiredArgsConstructor
+@Component
 public class RepetitionRule implements FraudRule{
 
     private final RedisTemplate<String, String> redisTemplate;
