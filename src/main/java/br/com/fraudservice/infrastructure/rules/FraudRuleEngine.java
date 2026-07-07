@@ -1,6 +1,7 @@
 package br.com.fraudservice.infrastructure.rules;
 
 
+import br.com.fraudservice.domain.FraudResult;
 import br.com.fraudservice.domain.enums.FraudScore;
 import br.com.fraudservice.infrastructure.messaging.event.TransactionCreatedEvent;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ public class FraudRuleEngine {
 
     private final List<FraudRule> rules;
 
-    public FraudScore checkScore(TransactionCreatedEvent event) {
+    public FraudResult checkScore(TransactionCreatedEvent event) {
 
         FraudScore score;
 
@@ -25,6 +26,7 @@ public class FraudRuleEngine {
                 .map(FraudRule::getRuleName)
                 .toList();
 
+        log.info("List of the triggered rules ={}", triggeredRules);
 
         switch (triggeredRules.size()){
             case 0 -> score = FraudScore.LOW;
@@ -33,7 +35,7 @@ public class FraudRuleEngine {
             default -> score = FraudScore.HIGH;
         }
 
-        return score;
+        return new FraudResult(score, triggeredRules);
     }
 }
 
