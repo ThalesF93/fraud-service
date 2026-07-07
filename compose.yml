@@ -1,0 +1,46 @@
+services:
+  fraud-service-db:
+    image: postgres:16
+    container_name: fraud-service-db
+    environment:
+      POSTGRES_DB: fraud-service_db
+      POSTGRES_USER: ${DB_USERNAME:-bytebank}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-bytebank}
+    ports:
+      - "5436:5432"
+    volumes:
+      - fraud-service_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-bytebank} -d fraud-service_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bytebank-net
+
+  fraud-service:
+    build:
+      context: .
+    container_name: fraud-service
+    depends_on:
+      fraud-service-db:
+        condition: service_healthy
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      EUREKA_DEFAULT_ZONE: http://eureka-server:8761/eureka/
+      SPRING_DATASOURCE_URL: jdbc:postgresql://fraud-service-db:5432/fraud-service_db
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME:-bytebank}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-bytebank}
+      SPRING_DATA_REDIS_HOST: redis
+      MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin:9411/api/v2/spans
+    ports:
+      - "8086:8083"
+    networks:
+      - bytebank-net
+
+networks:
+  bytebank-net:
+    external: true
+
+volumes:
+  fraud-service_data:
