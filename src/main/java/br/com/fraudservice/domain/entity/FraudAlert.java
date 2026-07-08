@@ -11,12 +11,13 @@ import java.util.UUID;
 
 @Table
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class FraudAlert {
 
     @Id

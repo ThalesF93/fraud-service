@@ -19,7 +19,7 @@ public class TransactionEventConsumer {
 
     private final EvaluateFraudUseCase evaluateFraudUseCase;
 
-    @KafkaListener(topics = "transaction.created", groupId = "transaction-group", containerFactory = "KafkaListenerContainerFactory")
+    @KafkaListener(topics = "transaction.created", groupId = "transaction-group", containerFactory = "kafkaListenerContainerFactory")
     public void consume(@Payload TransactionCreatedEvent event,
                         @Header(KafkaHeaders.RECEIVED_PARTITION) int partition,
                         @Header(KafkaHeaders.OFFSET) long offset,

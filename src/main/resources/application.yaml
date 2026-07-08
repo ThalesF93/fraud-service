@@ -35,7 +35,14 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 2147483647
       properties:
+        enable.idempotence: true
+        max.in.flight.requests.per.connection: 5
+        linger.ms: 5
+        batch.size: 32768
+        compression.type: snappy
         spring.json.type.mapping: score.response:br.com.fraudservice.infrastructure.messaging.event.ScoreEvent
     consumer:
       group-id: transaction-group

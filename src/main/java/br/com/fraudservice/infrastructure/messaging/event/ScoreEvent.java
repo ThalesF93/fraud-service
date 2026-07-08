@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public record ScoreEvent(
 
-        UUID transactionID,
+        UUID transactionId,
 
         FraudScore score
 ) {

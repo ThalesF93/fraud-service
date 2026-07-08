@@ -34,7 +34,7 @@ services:
       SPRING_DATA_REDIS_HOST: redis
       MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin:9411/api/v2/spans
     ports:
-      - "8086:8083"
+      - "8086:8086"
     networks:
       - bytebank-net
 

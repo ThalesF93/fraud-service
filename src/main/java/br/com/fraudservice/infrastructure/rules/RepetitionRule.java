@@ -19,6 +19,10 @@ public class RepetitionRule implements FraudRule{
     public boolean evaluate(TransactionCreatedEvent event) {
         log.info("Starting Repetition Rule Validation");
 
+        if (event.targetAccountId() == null) {
+            return false;
+        }
+
         String cacheKey = String.format("repetition:%s:%s:%s", event.originAccountId().toString(), event.targetAccountId().toString(), event.amount().toString());
         String cached = redisTemplate.opsForValue().get(cacheKey);
 

@@ -18,7 +18,7 @@ public class FrequencyRule implements FraudRule {
 
     @Override
     public boolean evaluate(TransactionCreatedEvent event) {
-        log.info("Starting Repetition Rule Validation");
+        log.info("Starting Frequency Rule Validation");
 
         String cacheKey = "frequency:%s" + event.originAccountId();
 
