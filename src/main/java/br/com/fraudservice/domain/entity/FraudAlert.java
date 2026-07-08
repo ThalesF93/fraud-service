@@ -3,8 +3,7 @@ package br.com.fraudservice.domain.entity;
 import br.com.fraudservice.domain.enums.FraudScore;
 import br.com.fraudservice.domain.enums.FraudStatus;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -12,8 +11,13 @@ import java.util.UUID;
 
 @Table
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class FraudAlert {
 
     @Id
@@ -40,5 +44,6 @@ public class FraudAlert {
     @Column
     @CreationTimestamp
     private LocalDateTime createdAt;
+    }
 
-}
+

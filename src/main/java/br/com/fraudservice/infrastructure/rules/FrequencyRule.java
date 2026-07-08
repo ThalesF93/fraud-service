@@ -4,11 +4,13 @@ import br.com.fraudservice.infrastructure.messaging.event.TransactionCreatedEven
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 
 @Slf4j
 @RequiredArgsConstructor
+@Component
 public class FrequencyRule implements FraudRule {
 
     private final RedisTemplate<String, Long> redisTemplate;
@@ -16,7 +18,7 @@ public class FrequencyRule implements FraudRule {
 
     @Override
     public boolean evaluate(TransactionCreatedEvent event) {
-        log.info("Starting Repetition Rule Validation");
+        log.info("Starting Frequency Rule Validation");
 
         String cacheKey = "frequency:%s" + event.originAccountId();
 

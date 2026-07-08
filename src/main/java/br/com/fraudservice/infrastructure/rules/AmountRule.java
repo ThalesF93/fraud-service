@@ -2,10 +2,12 @@ package br.com.fraudservice.infrastructure.rules;
 
 import br.com.fraudservice.infrastructure.messaging.event.TransactionCreatedEvent;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 @Slf4j
+@Component
 public class AmountRule implements FraudRule {
 
     private static final BigDecimal MAX_VALUE = new BigDecimal("5000");
