@@ -20,7 +20,7 @@ public class FrequencyRule implements FraudRule {
     public boolean evaluate(TransactionCreatedEvent event) {
         log.info("Starting Frequency Rule Validation");
 
-        String cacheKey = "frequency:%s" + event.originAccountId();
+        String cacheKey = "frequency:" + event.originAccountId();
 
         Long count = redisTemplate.opsForValue().increment(cacheKey);
 
