@@ -26,6 +26,7 @@ services:
       fraud-service-db:
         condition: service_healthy
     environment:
+      TZ: America/Sao_Paulo
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       EUREKA_DEFAULT_ZONE: http://eureka-server:8761/eureka/
       SPRING_DATASOURCE_URL: jdbc:postgresql://fraud-service-db:5432/fraud-service_db
